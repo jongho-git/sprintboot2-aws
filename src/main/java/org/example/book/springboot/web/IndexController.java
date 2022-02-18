@@ -1,6 +1,8 @@
 package org.example.book.springboot.web;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.example.book.springboot.config.auth.dto.SessionUser;
 import org.example.book.springboot.service.posts.PostsService;
 import org.example.book.springboot.web.dto.PostsResponseDto;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.jws.WebParam;
+import javax.servlet.http.HttpSession;
 
 @RequiredArgsConstructor
 @Controller
@@ -24,10 +27,17 @@ public class IndexController {
     }
 
     private final PostsService postsService;
+    private final HttpSession httpSession;
 
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("posts", postsService.findAllDesc());
+
+        SessionUser user= (SessionUser) httpSession.getAttribute("user");
+        if(user != null) {
+            model.addAttribute("googleName", user.getName());
+        }
+
         return "index";
     }
 
@@ -38,4 +48,5 @@ public class IndexController {
 
         return "posts-update";
     }
+
 }
