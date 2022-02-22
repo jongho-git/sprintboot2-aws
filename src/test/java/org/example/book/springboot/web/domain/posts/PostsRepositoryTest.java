@@ -1,6 +1,5 @@
 package org.example.book.springboot.web.domain.posts;
 
-import javafx.geometry.Pos;
 import org.example.book.springboot.domain.posts.Posts;
 import org.example.book.springboot.domain.posts.PostsRepository;
 import org.junit.After;
