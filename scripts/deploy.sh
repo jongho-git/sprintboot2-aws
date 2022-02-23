@@ -18,7 +18,8 @@ echo "> build 파일복사"
 cp $REPOSITORY/zip/*.jar $REPOSITORY/
 
 echo "> 현개 구동중인 앱 pid 확인"
-CURRENT_PID=$(pgrep -fl sprintboot2-aws|grep jar|awk '{print $1}')
+#CURRENT_PID=$(pgrep -fl sprintboot2-aws|grep jar|awk '{print $1}') # jar 로 검색 안됨
+CURRENT_PID=$(pgrep -fl sprintboot2-aws|grep java|awk '{print $1}')
 
 echo "현재 pid : $CURRENT_PID"
 if [ -z "$CURRENT_PID" ]; then
